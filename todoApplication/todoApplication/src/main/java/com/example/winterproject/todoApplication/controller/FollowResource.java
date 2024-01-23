@@ -2,6 +2,7 @@ package com.example.winterproject.todoApplication.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,6 +42,7 @@ public class FollowResource {
 		Optional<User> followerOptional = userRepository.findById(followId.getFollower());
 		Optional<User> followingOptional = userRepository.findById(followId.getFollowing());
 		
+		// follwer랑 following 모두 존재하면 follow
 		if (followerOptional.isPresent() && followingOptional.isPresent()) {
 			Follow follow = new Follow();
 		    follow.setFollowId(followId); // 복합키 설정
@@ -56,10 +58,7 @@ public class FollowResource {
 	// 언팔로우
 	// DELETE /cancel_follow/{follower}/{following}
 	@DeleteMapping("/cancel_follow/{follower}/{following}")
-	public ResponseEntity<String> cancelFollow(
-	    @PathVariable String follower,
-	    @PathVariable String following
-	) {
+	public ResponseEntity<String> cancelFollow(@PathVariable String follower, @PathVariable String following) {
 	    FollowId followId = new FollowId();
 	    followId.setFollower(follower);
 	    followId.setFollowing(following);
@@ -71,9 +70,27 @@ public class FollowResource {
 	        followRepository.delete(follow); // 팔로우 관계 삭제
 	        return ResponseEntity.ok("Unfollow."); // 언팔로우 성공
 	    } else {
-	        return ResponseEntity.ok("Follow relationship not found."); // 해당 팔로우 관계가 없음
+	    	return ResponseEntity.badRequest().build();
 	    }
 	}
 
+	// 팔로워 조회
+	// GET /users/{id}/following
+	//@GetMapping("/users/{id}/following")
+	//public void checkFollowing(@PathVariable String user_id) {
+		
+	//}
+	
+	/*@GetMapping("/following/{id}")
+	public ResponseEntity<List<User>> checkFollowing(@PathVariable("id") String user_id) {
+	    // 팔로잉하는 사용자의 ID 목록을 조회
+	    List<String> followingUserIds = followRepository.findFollowingUserIdsByUserId(user_id);
+
+	    // 해당 ID를 사용하여 User 엔티티 목록 조회
+	    List<User> followingUsers = userRepository.findAllById(followingUserIds);
+
+	    return ResponseEntity.ok(followingUsers);
+	}*/
+	
     
 }

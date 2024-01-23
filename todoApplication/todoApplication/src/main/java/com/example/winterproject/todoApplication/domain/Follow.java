@@ -26,6 +26,9 @@ public class Follow implements Serializable{
     @JoinColumn(name = "following", insertable = false, updatable = false)
     private User follingUser;
     
+    public User getFollowingUser() {
+        return follingUser;
+    }
 	
 	public FollowId getFollowId() {
 		return followId;

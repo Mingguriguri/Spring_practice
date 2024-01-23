@@ -2,6 +2,8 @@ package com.example.winterproject.todoApplication.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -29,6 +31,9 @@ public class User {
     @OneToMany(mappedBy = "follingUser")
     private List<Follow> followings;
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Todo> todo;
 	
 	public String getUserId() {
 		return userId;

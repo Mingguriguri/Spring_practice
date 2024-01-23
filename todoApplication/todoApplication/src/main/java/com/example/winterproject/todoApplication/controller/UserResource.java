@@ -130,6 +130,5 @@ public class UserResource {
 	public ResponseEntity<String> deleteUser(@PathVariable String user_id){
 		userRepository.deleteById(user_id);
 	    return ResponseEntity.ok("delete account");
-
 	}
 }
