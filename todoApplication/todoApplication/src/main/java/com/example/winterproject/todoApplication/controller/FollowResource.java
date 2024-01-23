@@ -79,18 +79,6 @@ public class FollowResource {
 	    	return ResponseEntity.badRequest().build();
 	    }
 	}
-
-	
-	/*@GetMapping("/following/{id}")
-	public ResponseEntity<List<User>> checkFollowing(@PathVariable("id") String user_id) {
-	    // 팔로잉하는 사용자의 ID 목록을 조회
-	    List<String> followingUserIds = followRepository.findFollowingUserIdsByUserId(user_id);
-
-	    // 해당 ID를 사용하여 User 엔티티 목록 조회
-	    List<User> followingUsers = userRepository.findAllById(followingUserIds);
-
-	    return ResponseEntity.ok(followingUsers);
-	}*/
 	
 	/*
 	 *  팔로워 조회
