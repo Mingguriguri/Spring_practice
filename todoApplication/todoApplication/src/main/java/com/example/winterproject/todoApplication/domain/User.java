@@ -1,8 +1,11 @@
 package com.example.winterproject.todoApplication.domain;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity(name="users")
 public class User {
@@ -19,6 +22,13 @@ public class User {
 	private String name;
 	
 	private int level;
+	
+	@OneToMany(mappedBy = "followerUser")
+    private List<Follow> followers;
+
+    @OneToMany(mappedBy = "follingUser")
+    private List<Follow> followings;
+
 	
 	public String getUserId() {
 		return userId;
