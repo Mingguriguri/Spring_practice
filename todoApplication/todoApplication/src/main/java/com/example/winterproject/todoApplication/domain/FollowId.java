@@ -1,4 +1,4 @@
-	package com.example.winterproject.todoApplication.domain;
+package com.example.winterproject.todoApplication.domain;
 
 import java.io.Serializable;
 
