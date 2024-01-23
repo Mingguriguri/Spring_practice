@@ -7,6 +7,8 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 public class LikeId implements Serializable {
 	private Integer todoId; 
-    private String userId; 
+    private String userId;
+    
+	
     	
 }

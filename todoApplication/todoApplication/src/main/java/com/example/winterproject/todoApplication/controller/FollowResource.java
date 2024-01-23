@@ -2,7 +2,6 @@ package com.example.winterproject.todoApplication.controller;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +16,7 @@ import com.example.winterproject.todoApplication.domain.FollowId;
 import com.example.winterproject.todoApplication.domain.User;
 import com.example.winterproject.todoApplication.repository.FollowRepository;
 import com.example.winterproject.todoApplication.repository.UserRepository;
+import com.example.winterproject.todoApplication.repository.dto.FollowingUserInfo;
 
 @RestController
 public class FollowResource {
@@ -28,14 +28,18 @@ public class FollowResource {
 		this.userRepository = userRepository;
 	 }
 	 
-	// 전체 조회
+	/*
+	 * 전체 조회
+	 */
 	// GET /follow
 	@GetMapping("/follow")
 	public List<Follow> retrieveAllUsers(){
 		return followRepository.findAll();		
 	}
 	 
-	// 팔로우
+	/*
+	 * 팔로우
+	 */
 	// POST /follow
 	@PostMapping("/follow")
 	public ResponseEntity<String> followUser(@RequestBody FollowId followId) {
@@ -55,7 +59,9 @@ public class FollowResource {
 	   
 	}
 	
-	// 언팔로우
+	/*
+	 * 언팔로우
+	 */
 	// DELETE /cancel_follow/{follower}/{following}
 	@DeleteMapping("/cancel_follow/{follower}/{following}")
 	public ResponseEntity<String> cancelFollow(@PathVariable String follower, @PathVariable String following) {
@@ -74,12 +80,6 @@ public class FollowResource {
 	    }
 	}
 
-	// 팔로워 조회
-	// GET /users/{id}/following
-	//@GetMapping("/users/{id}/following")
-	//public void checkFollowing(@PathVariable String user_id) {
-		
-	//}
 	
 	/*@GetMapping("/following/{id}")
 	public ResponseEntity<List<User>> checkFollowing(@PathVariable("id") String user_id) {
@@ -92,5 +92,25 @@ public class FollowResource {
 	    return ResponseEntity.ok(followingUsers);
 	}*/
 	
+	/*
+	 *  팔로워 조회
+	 */
+	// GET /following/{userId}
+	// userId가 팔로우하고 있는 유저 목록
+	@GetMapping("/following/{userId}")
+    public List<Follow> retrieveFollowing(@PathVariable String userId) {
+        return followRepository.findByFollowIdFollower(userId);
+    }
+	
+	/*
+	 *  팔로잉 조회
+	 */
+	// GET /follower/{userId}
+	// userId를 팔로우하는 유저들의 목록
+	@GetMapping("/follower/{userId}")
+    public List<Follow> retrieveFollower(@PathVariable String userId) {
+        return followRepository.findByFollowIdFollowing(userId);
+    }
+    
     
 }
