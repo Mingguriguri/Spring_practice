@@ -31,7 +31,7 @@ public class LikeResource {
 	}
 	
 	/*
-	 * 조회
+	 * 전체 조회
 	 */
 	// GET /like
 	@GetMapping("/like")
@@ -39,18 +39,16 @@ public class LikeResource {
 		return likeRepository.findAll();
 	}
 	
-	 // 좋아요
+	/*
+	 * 좋아요
+	 */
     // POST /like
     @PostMapping("/like")
     public ResponseEntity<String> likeTodo(@RequestBody LikeId likeId) {
-	    // Like 객체 생성
 	    Like like = new Like();
 	    like.setLikeId(likeId);
-	
-	    // Like 객체 저장
 	    likeRepository.save(like);
 	
-	    // 성공 메시지 반환
 	    return ResponseEntity.ok("Liked.");
     }
 		

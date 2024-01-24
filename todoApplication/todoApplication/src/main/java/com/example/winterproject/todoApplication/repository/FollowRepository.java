@@ -9,9 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.winterproject.todoApplication.domain.Follow;
 import com.example.winterproject.todoApplication.domain.FollowId;
-import com.example.winterproject.todoApplication.repository.dto.FollowingUserInfo;
 
-@Repository
 public interface FollowRepository extends JpaRepository<Follow, FollowId > {
 
 	// follower를 기준으로 팔로잉 목록 조회

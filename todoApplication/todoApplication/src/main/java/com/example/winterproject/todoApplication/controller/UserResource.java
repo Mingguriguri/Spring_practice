@@ -32,14 +32,18 @@ public class UserResource {
 		 this.userRepository = userRepository;
 	 }
 	 
+	 /*
+	  * 전체 사용자 조회
+	  */
 	 // GET /users 
-	 // 사용자 조회
 	@GetMapping("/users")
 	public List<User> retrieveAllUsers(){
 		return userRepository.findAll();		
 	}
 	
-	// 회원가입
+	/*
+	 * 회원가입
+	 */
 	// POST /sign_up
 	@PostMapping("/sign_up")
 	public ResponseEntity<String> createUser(@Valid @RequestBody User user) {
@@ -52,7 +56,9 @@ public class UserResource {
 		return ResponseEntity.created(location).build();
 	}
 	
-	// 로그인
+	/*
+	 * 로그인
+	 */
 	// POST /log_in
 	@PostMapping("/log_in")
 	public ResponseEntity<String> loginUser(@RequestBody User user){
@@ -74,16 +80,21 @@ public class UserResource {
 		
 	}
 	
-	// 로그아웃
+	/*
+	 * 로그아웃
+	 */
 	// POST /log_out
-	// BODY: {}
 	@PostMapping("/log_out")
 	public ResponseEntity<String> logoutUser(@RequestBody User user){
 		// 로그아웃 세션 또는 토큰 무효화
+		// 이에 대한 코드 구현이 아직 안 되었으므로 BODY에 아래와 같이 입력
+		// BODY: {}
 		return ResponseEntity.ok("Logout");
 	}
 	
-	// 회원정보 조회
+	/*
+	 * 회원정보 조회
+	 */
 	// GET /user_info/{user_id}
 	@GetMapping("/user_info/{user_id}")
 	public EntityModel<UserInfoResponse> retrieveUser(@PathVariable String user_id){
@@ -92,6 +103,7 @@ public class UserResource {
 		if(userOptional.isEmpty())
 			throw new UserNotFoundException("id:"+user_id);
 		
+		// 이메일, 이름, 레벨 정보만 반환
 		User user = userOptional.get();
 	    UserInfoResponse userInfoResponse = new UserInfoResponse(user.getEmail(), user.getName(), user.getLevel());
 
@@ -101,7 +113,9 @@ public class UserResource {
 	}
 
 
-	// 회원정보 수정
+	/*
+	 * 회원정보 수정
+	 */
 	// PUT /user_info/{user_id}
 	@PutMapping("/user_info/{user_id}")
 	public ResponseEntity<String> updateUser(@PathVariable String user_id, @RequestBody User updatedUser){
@@ -113,18 +127,19 @@ public class UserResource {
 	    }
 
 	    User existingUser = userOptional.get();
-	    
-	    // 업데이트할 필드 설정
+	    // 업데이트는 이메일과 이름만 가능
 	    existingUser.setEmail(updatedUser.getEmail());
 	    existingUser.setName(updatedUser.getName());
 
-	    // 수정된 정보 저장
-	    userRepository.save(existingUser);
+	    
+	    userRepository.save(existingUser); // 수정된 정보 저장
 	    
 		return ResponseEntity.ok("Successfully modify!");
 	}
 	
-	// 회원탈퇴
+	/*
+	 * 회원 탈퇴
+	 */
 	// DELETE /delete_account/{user_id}
 	@DeleteMapping("/delete_account/{user_id}")
 	public ResponseEntity<String> deleteUser(@PathVariable String user_id){

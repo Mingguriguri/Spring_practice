@@ -49,9 +49,10 @@ public class FollowResource {
 		// follwer랑 following 모두 존재하면 follow
 		if (followerOptional.isPresent() && followingOptional.isPresent()) {
 			Follow follow = new Follow();
-		    follow.setFollowId(followId); // 복합키 설정
-		    follow.setFollowerUser(followingOptional.get());
-		    follow.setFollingUser(followingOptional.get());
+		    follow.setFollowId(followId); 
+		    // 복합키 각각 설정해야 함		    
+		    follow.setFollowerUser(followerOptional.get());
+		    follow.setFollowingUser(followingOptional.get());
 		    followRepository.save(follow);
 		    return ResponseEntity.ok("Follow."); 
 		}

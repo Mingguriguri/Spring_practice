@@ -30,7 +30,7 @@ public class User {
 	@OneToMany(mappedBy = "followerUser")
     private List<Follow> followers;
 
-    @OneToMany(mappedBy = "follingUser")
+    @OneToMany(mappedBy = "followingUser")
     private List<Follow> followings;
 
     @OneToMany(mappedBy = "user")

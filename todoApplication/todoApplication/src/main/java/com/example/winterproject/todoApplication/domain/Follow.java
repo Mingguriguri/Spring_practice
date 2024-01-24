@@ -26,12 +26,8 @@ public class Follow implements Serializable{
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     @JoinColumn(name = "following", insertable = false, updatable = false)
-    private User follingUser;
-    
-    public User getFollowingUser() {
-        return follingUser;
-    }
-	
+    private User followingUser;
+
 	public FollowId getFollowId() {
 		return followId;
 	}
@@ -48,16 +44,19 @@ public class Follow implements Serializable{
 		this.followerUser = followerUser;
 	}
 
-	public User getFollingUser() {
-		return follingUser;
+	public User getFollowingUser() {
+		return followingUser;
 	}
 
-	public void setFollingUser(User follingUser) {
-		this.follingUser = follingUser;
+	public void setFollowingUser(User followingUser) {
+		this.followingUser = followingUser;
 	}
 
 	@Override
 	public String toString() {
-		return "Follow [followId=" + followId + ", followerUser=" + followerUser + ", follingUser=" + follingUser + "]";
+		return "Follow [followId=" + followId + ", followerUser=" + followerUser + ", followingUser=" + followingUser
+				+ "]";
 	}
+    
+   
 }
