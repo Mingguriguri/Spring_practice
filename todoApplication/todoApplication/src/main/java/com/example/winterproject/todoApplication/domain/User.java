@@ -25,7 +25,7 @@ public class User {
 	
 	private String name;
 	
-	private int level;
+	private int level = 1; // default level
 	
 	@OneToMany(mappedBy = "followerUser")
     private List<Follow> followers;
