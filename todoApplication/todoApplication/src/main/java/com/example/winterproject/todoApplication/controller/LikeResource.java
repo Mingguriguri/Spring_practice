@@ -6,17 +6,13 @@ import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.winterproject.todoApplication.domain.Follow;
-import com.example.winterproject.todoApplication.domain.FollowId;
 import com.example.winterproject.todoApplication.domain.Like;
 import com.example.winterproject.todoApplication.domain.LikeId;
-import com.example.winterproject.todoApplication.domain.Todo;
-import com.example.winterproject.todoApplication.domain.User;
 import com.example.winterproject.todoApplication.repository.LikeRepository;
 
 
@@ -55,12 +51,12 @@ public class LikeResource {
     /*
      * 좋아요 취소
      */
-    // DELETE /cancel_like
-    @DeleteMapping("/cancel_like/{userId}/{todoId}")
-    public ResponseEntity<String> cancelLike(@PathVariable String userId, @PathVariable Integer todoId) {
+    // DELETE /cancel_like?userId=72e73d4c50fdj&postId=72e73d4c50fd
+    @DeleteMapping("/cancel_like")
+    public ResponseEntity<String> cancelLike(@RequestParam("userId") String userId, @RequestParam("postId") Integer postId) {
     	LikeId likeId = new LikeId();
     	likeId.setUserId(userId);
-    	likeId.setTodoId(todoId);
+    	likeId.setTodoId(postId);
         
         Optional<Like> likeOptional = likeRepository.findById(likeId);
 
