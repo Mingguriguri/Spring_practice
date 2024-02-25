@@ -1,6 +1,8 @@
 package com.example.winterproject.todoApplication.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
@@ -55,8 +57,8 @@ public class LikeResource {
     @DeleteMapping("/cancel_like")
     public ResponseEntity<String> cancelLike(@RequestParam("userId") String userId, @RequestParam("todoId") Integer todoId) {
     	LikeId likeId = new LikeId();
-    	likeId.setUserId(userId);
-    	likeId.setTodoId(todoId);
+    	likeId.setUser_id(userId);
+    	likeId.setTodo_id(todoId);
         
         Optional<Like> likeOptional = likeRepository.findById(likeId);
 
@@ -68,4 +70,13 @@ public class LikeResource {
             return ResponseEntity.badRequest().body("Like not found.");
         }
     }
+    
+    /*
+     * 특정 게시물의 좋아요 수 조회
+     */
+    /*
+     * @GetMapping("/like/count")
+     * 
+     */
+    
 }

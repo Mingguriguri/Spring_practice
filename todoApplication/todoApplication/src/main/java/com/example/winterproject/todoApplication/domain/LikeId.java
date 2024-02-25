@@ -8,21 +8,24 @@ import jakarta.persistence.Embeddable;
 public class LikeId implements Serializable {
 	private Integer todo_id; 
     private String user_id;
-	public Integer getTodoId() {
+	public Integer getTodo_id() {
 		return todo_id;
 	}
-	public void setTodoId(Integer todo_id) {
+	public void setTodo_id(Integer todo_id) {
 		this.todo_id = todo_id;
 	}
-	public String getUserId() {
+	public String getUser_id() {
 		return user_id;
 	}
-	public void setUserId(String useuser_idrId) {
+	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
 	@Override
 	public String toString() {
 		return "LikeId [todo_id=" + todo_id + ", user_id=" + user_id + "]";
 	}
+    
+    
+    
 	
 }
