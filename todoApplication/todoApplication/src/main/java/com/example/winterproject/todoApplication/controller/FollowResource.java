@@ -1,6 +1,8 @@
 package com.example.winterproject.todoApplication.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
@@ -104,6 +106,18 @@ public class FollowResource {
 	    return followRepository.findByFollowIdFollowed(userId);
 	}
 
-    
-    
+	/*
+	 * userID에 대한 팔로잉 수와 팔로워 수 조회
+	 */
+    @GetMapping("/follow/count")
+    public ResponseEntity<?> getFollowCounts(@RequestParam String userId) {
+        long followingCount = followRepository.countByFollowIdFollowing(userId);
+        long followerCount = followRepository.countByFollowIdFollowed(userId);
+
+        Map<String, Long> counts = new HashMap<>();
+        counts.put("followingCount", followingCount);
+        counts.put("followerCount", followerCount);
+
+        return ResponseEntity.ok(counts);
+    }
 }

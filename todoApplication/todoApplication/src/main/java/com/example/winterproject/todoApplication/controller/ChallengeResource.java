@@ -43,8 +43,6 @@ public class ChallengeResource {
 	 * 챌린지 생성
 	 */
 	// POST /challenges
-	
-	
 	@PostMapping("/challenges")
 	public ResponseEntity<Map<String, Object>> createChallenge(@RequestBody Challenge challenge) {
 	    Challenge savedChallenge = challengeRepository.save(challenge);

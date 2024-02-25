@@ -29,6 +29,8 @@ public class Challenge {
 	private String mainImg;
 	
 	private int participants = 1; // default 1
+	
+	// Getters and Setters
 	public Long getNoTag() {
 		return noTag;
 	}
@@ -59,6 +61,8 @@ public class Challenge {
 	public void setParticipants(int participants) {
 		this.participants = participants;
 	}
+	
+	// toString
 	@Override
 	public String toString() {
 		return "Challenge [noTag=" + noTag + ", tagName=" + tagName + ", tagDesc=" + tagDesc + ", mainImg=" + mainImg
