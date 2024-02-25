@@ -40,10 +40,11 @@
 	      <version>2.3.0</version>
    		</dependency>
 		<!--Security-->
+		<!--
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-client</artifactId>
-        </dependency>
+        </dependency>-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -69,8 +70,13 @@
     		<groupId>org.apache.tomcat.embed</groupId>
     		<artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>-->
-			
 		
+		<!--랜덤 문자열 아이디 생성 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.12.0</version> 
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
@@ -16,6 +17,7 @@ public class User {
 	
 	
 	@Id
+	//@GeneratedValue(generator = "OrderIdGenerator")
 	@Column(name="user_id")
 	private String userId;
 	
@@ -36,42 +38,77 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Todo> todo;
-	
+
 	public String getUserId() {
 		return userId;
 	}
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getLevel() {
-		return level;
-	}
-	public void setLevel(int level) {
-		this.level = level;
-	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public List<Follow> getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(List<Follow> followers) {
+		this.followers = followers;
+	}
+
+	public List<Follow> getFollowings() {
+		return followings;
+	}
+
+	public void setFollowings(List<Follow> followings) {
+		this.followings = followings;
+	}
+
+	public List<Todo> getTodo() {
+		return todo;
+	}
+
+	public void setTodo(List<Todo> todo) {
+		this.todo = todo;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", name=" + name + ", level="
-				+ level + "]";
+				+ level + ", followers=" + followers + ", followings=" + followings + ", todo=" + todo + "]";
 	}
+	
 	
 	
 }
