@@ -11,7 +11,7 @@ insert into users(user_id, email, password, name, level)
 values('4','joemail@email.com', '0000', 'jo', 2);
 
 -- Follow 테이블에 더미 팔로우 데이터 삽입
-insert into follow(follower, following)
+insert into follow(following, followed)
 values ('1', '2'),('1', '3'),('1', '4'),('2','1');
 
 -- Todo 더미데이터

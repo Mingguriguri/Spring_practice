@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.winterproject.todoApplication.domain.Follow;
@@ -16,7 +17,6 @@ import com.example.winterproject.todoApplication.domain.FollowId;
 import com.example.winterproject.todoApplication.domain.User;
 import com.example.winterproject.todoApplication.repository.FollowRepository;
 import com.example.winterproject.todoApplication.repository.UserRepository;
-import com.example.winterproject.todoApplication.repository.dto.FollowingUserInfo;
 
 @RestController
 public class FollowResource {
@@ -43,8 +43,8 @@ public class FollowResource {
 	// POST /follow
 	@PostMapping("/follow")
 	public ResponseEntity<String> followUser(@RequestBody FollowId followId) {
-		Optional<User> followerOptional = userRepository.findById(followId.getFollower());
-		Optional<User> followingOptional = userRepository.findById(followId.getFollowing());
+		Optional<User> followerOptional = userRepository.findById(followId.getFollowing());
+		Optional<User> followingOptional = userRepository.findById(followId.getFollowed());
 		
 		// follwer랑 following 모두 존재하면 follow
 		if (followerOptional.isPresent() && followingOptional.isPresent()) {
@@ -63,12 +63,12 @@ public class FollowResource {
 	/*
 	 * 언팔로우
 	 */
-	// DELETE /cancel_follow/{follower}/{following}
-	@DeleteMapping("/cancel_follow/{follower}/{following}")
-	public ResponseEntity<String> cancelFollow(@PathVariable String follower, @PathVariable String following) {
+	// DELETE /cancel_follow/{following}/{followed}
+	@DeleteMapping("/cancel_follow/{following}/{followed}")
+	public ResponseEntity<String> cancelFollow(@PathVariable String following, @PathVariable String followed) {
 	    FollowId followId = new FollowId();
-	    followId.setFollower(follower);
 	    followId.setFollowing(following);
+	    followId.setFollowed(followed);
 	    
 	    Optional<Follow> followOptional = followRepository.findById(followId);
 	    
@@ -84,22 +84,26 @@ public class FollowResource {
 	/*
 	 *  팔로워 조회
 	 */
-	// GET /following/{userId}
-	// userId가 팔로우하고 있는 유저 목록
-	@GetMapping("/following/{userId}")
-    public List<Follow> retrieveFollowing(@PathVariable String userId) {
-        return followRepository.findByFollowIdFollower(userId);
-    }
+	// GET /followers?userId=72e73d4c50fd
+	// 연예인A를 팔로우 하고 있는 사람 목록 반환(연예인 A의 팔로워들)
+	@GetMapping("/followers")
+	public List<Follow> retrieveFollowers(@RequestParam String userId) {
+	    // FollowRepository에서 제공하는 메서드를 사용하여 userId를 팔로우하는 사용자 목록 조회
+	    return followRepository.findByFollowIdFollowing(userId);
+	}
+
 	
 	/*
 	 *  팔로잉 조회
 	 */
-	// GET /follower/{userId}
-	// userId를 팔로우하는 유저들의 목록
-	@GetMapping("/follower/{userId}")
-    public List<Follow> retrieveFollower(@PathVariable String userId) {
-        return followRepository.findByFollowIdFollowing(userId);
-    }
+	// GET /following/?userId=72e73d4c50fd
+	// 연예인A가 팔로우 하고 있는 사람의 목록 반환
+	@GetMapping("/following")
+	public List<Follow> retrieveFollowing(@RequestParam String userId) {
+	    // userId가 팔로우하고 있는 사람들의 목록을 반환
+	    return followRepository.findByFollowIdFollowed(userId);
+	}
+
     
     
 }

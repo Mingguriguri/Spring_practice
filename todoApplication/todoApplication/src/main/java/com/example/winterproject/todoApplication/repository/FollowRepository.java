@@ -13,9 +13,9 @@ import com.example.winterproject.todoApplication.domain.FollowId;
 public interface FollowRepository extends JpaRepository<Follow, FollowId > {
 
 	// follower를 기준으로 팔로잉 목록 조회
-    List<Follow> findByFollowIdFollower(String followerUserId);
+    List<Follow> findByFollowIdFollowing(String followingUserId);
     
     // following을 기준으로 팔로워 목록 조회
-    List<Follow> findByFollowIdFollowing(String followingUserId);
+    List<Follow> findByFollowIdFollowed(String followedUserId);
 
 }

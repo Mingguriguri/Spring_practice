@@ -20,12 +20,12 @@ public class Follow implements Serializable{
   // 테이블들간 연관관계를 설정해 줄때 일대다(1:N) 관계일때 @JoinColumn 어노테이션을 사용해서 해당 컬럼의 이름을 설정
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
-    @JoinColumn(name = "follower", insertable = false, updatable = false)
+    @JoinColumn(name = "following", insertable = false, updatable = false)
     private User followerUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
-    @JoinColumn(name = "following", insertable = false, updatable = false)
+    @JoinColumn(name = "followed", insertable = false, updatable = false)
     private User followingUser;
 
 	public FollowId getFollowId() {
@@ -57,6 +57,7 @@ public class Follow implements Serializable{
 		return "Follow [followId=" + followId + ", followerUser=" + followerUser + ", followingUser=" + followingUser
 				+ "]";
 	}
+    							
     
    
 }
