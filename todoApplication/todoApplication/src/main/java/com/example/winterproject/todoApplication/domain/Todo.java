@@ -31,5 +31,4 @@ public class Todo {
 	private String task;
 	
 
-	
 }

@@ -51,12 +51,12 @@ public class LikeResource {
     /*
      * 좋아요 취소
      */
-    // DELETE /cancel_like?userId=72e73d4c50fdj&postId=72e73d4c50fd
+    // DELETE /cancel_like?userId=72e73d4c50fdj&postId=1
     @DeleteMapping("/cancel_like")
-    public ResponseEntity<String> cancelLike(@RequestParam("userId") String userId, @RequestParam("postId") Integer postId) {
+    public ResponseEntity<String> cancelLike(@RequestParam("userId") String userId, @RequestParam("todoId") Integer todoId) {
     	LikeId likeId = new LikeId();
     	likeId.setUserId(userId);
-    	likeId.setTodoId(postId);
+    	likeId.setTodoId(todoId);
         
         Optional<Like> likeOptional = likeRepository.findById(likeId);
 

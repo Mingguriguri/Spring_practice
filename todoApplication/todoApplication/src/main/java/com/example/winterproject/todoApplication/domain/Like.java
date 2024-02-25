@@ -19,14 +19,14 @@ public class Like implements Serializable{
 	// 테이블들간 연관관계를 설정해 줄때 일대다(1:N) 관계일때 @JoinColumn 어노테이션을 사용해서 해당 컬럼의 이름을 설정
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
-    @JoinColumn(name = "user_detail", insertable = false, updatable = false)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
-    @JoinColumn(name = "todo", insertable = false, updatable = false)
+    @JoinColumn(name = "todo_id", insertable = false, updatable = false)
     private Todo todo;
-	
+
 	public LikeId getLikeId() {
 		return likeId;
 	}
@@ -34,7 +34,6 @@ public class Like implements Serializable{
 	public void setLikeId(LikeId likeId) {
 		this.likeId = likeId;
 	}
-
 
 	public User getUser() {
 		return user;
@@ -57,4 +56,5 @@ public class Like implements Serializable{
 		return "Like [likeId=" + likeId + ", user=" + user + ", todo=" + todo + "]";
 	}
 	
+    
 }
