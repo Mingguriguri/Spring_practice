@@ -1,15 +1,16 @@
 package com.example.winterproject.todoApplication.domain;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 
 @Entity(name="users")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -17,7 +18,6 @@ public class User {
 	
 	
 	@Id
-	//@GeneratedValue(generator = "OrderIdGenerator")
 	@Column(name="user_id")
 	private String userId;
 	
@@ -38,6 +38,11 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Todo> todo;
+    
+    @PrePersist
+    public void generateUUID() {
+        this.userId = UUID.randomUUID().toString();
+    }
 
 	public String getUserId() {
 		return userId;
